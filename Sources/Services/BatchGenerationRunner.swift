@@ -90,15 +90,15 @@ struct BatchGenerationItemState: Identifiable, Equatable {
     var statusLabel: String {
         switch status {
         case .pending:
-            return "Pending"
+            return NSLocalizedString("Pending", comment: "Batch item status")
         case .running:
-            return "Running"
+            return NSLocalizedString("Running", comment: "Batch item status")
         case .saved:
-            return "Saved"
+            return NSLocalizedString("Saved", comment: "Batch item status")
         case .failed:
-            return "Failed"
+            return NSLocalizedString("Failed", comment: "Batch item status")
         case .cancelled:
-            return "Cancelled"
+            return NSLocalizedString("Cancelled", comment: "Batch item status")
         }
     }
 
@@ -468,7 +468,10 @@ final class BatchGenerationCoordinator: ObservableObject {
                 longFormPlan = plan
                 lines = plan.segments.map(\.spokenTextForGeneration)
             } catch {
-                errorMessage = "Long-form planning failed: \(error.localizedDescription)"
+                errorMessage = String.localizedStringWithFormat(
+                    NSLocalizedString("Long-form planning failed: %@", comment: "Long-form planning error"),
+                    error.localizedDescription
+                )
                 return
             }
         }
@@ -476,11 +479,15 @@ final class BatchGenerationCoordinator: ObservableObject {
         guard !lines.isEmpty else { return }
         let maxBatchSegments = 100
         if lines.count > maxBatchSegments {
-            errorMessage = "Batch is too large: \(lines.count) segments exceeds the maximum of \(maxBatchSegments). Please split the text and try again."
+            errorMessage = String.localizedStringWithFormat(
+                NSLocalizedString("Batch is too large: %lld segments exceeds the maximum of %lld. Please split the text and try again.", comment: "Batch size error"),
+                Int64(lines.count),
+                Int64(maxBatchSegments)
+            )
             return
         }
         guard var request = requestBuilder(lines) else {
-            errorMessage = "Model configuration not found"
+            errorMessage = NSLocalizedString("Model configuration not found", comment: "Missing model error")
             return
         }
         request.longFormPlan = longFormPlan
@@ -795,18 +802,30 @@ final class BatchGenerationRunner {
                     publishItems()
                     return .failed(
                         items: items,
-                        message: "A previously generated long-form segment no longer passes audio quality checks."
+                        message: NSLocalizedString("A previously generated long-form segment no longer passes audio quality checks.", comment: "Long-form quality failure")
                     )
                 }
                 completedCount += 1
-                publishProgress(activeItemIndex: index, message: "Reusing item \(index + 1)/\(total)...")
+                publishProgress(
+                    activeItemIndex: index,
+                    message: String.localizedStringWithFormat(
+                        NSLocalizedString("Reusing item %lld/%lld...", comment: "Batch progress"),
+                        Int64(index + 1), Int64(total)
+                    )
+                )
                 publishItems()
                 continue
             }
 
             items[index].status = .running
             publishItems()
-            publishProgress(activeItemIndex: index, message: "Generating item \(index + 1)/\(total)...")
+            publishProgress(
+                activeItemIndex: index,
+                message: String.localizedStringWithFormat(
+                    NSLocalizedString("Generating item %lld/%lld...", comment: "Batch progress"),
+                    Int64(index + 1), Int64(total)
+                )
+            )
 
             let outputPath = makeOutputPath(request.model.outputSubfolder, line)
             do {
@@ -836,12 +855,18 @@ final class BatchGenerationRunner {
                         publishItems()
                         return .failed(
                             items: items,
-                            message: "Long-form batch failed audio quality checks. Review the failed segment details before retrying."
+                            message: NSLocalizedString("Long-form batch failed audio quality checks. Review the failed segment details before retrying.", comment: "Long-form quality failure")
                         )
                     }
                 }
 
-                publishProgress(activeItemIndex: index, message: "Saving item \(index + 1)/\(total)...")
+                publishProgress(
+                    activeItemIndex: index,
+                    message: String.localizedStringWithFormat(
+                        NSLocalizedString("Saving item %lld/%lld...", comment: "Batch progress"),
+                        Int64(index + 1), Int64(total)
+                    )
+                )
 
                 let generation = request.makeHistoryRecord(for: line, result: result)
                 let savedGeneration = try await store.saveGeneration(generation)
@@ -876,7 +901,7 @@ final class BatchGenerationRunner {
         }
 
         if request.segmentationMode == .longForm {
-            publishProgress(activeItemIndex: nil, message: "Joining segments...")
+            publishProgress(activeItemIndex: nil, message: NSLocalizedString("Joining segments...", comment: "Long-form progress"))
             do {
                 let joined = try await assembleLongFormOutput(request: request, items: items)
                 let joinedReport = await audioQualityEvaluator(
@@ -893,7 +918,10 @@ final class BatchGenerationRunner {
                 if !joinedReport.passed {
                     return .failed(
                         items: items,
-                        message: "Long-form joined output failed audio quality checks: \(joinedReport.failureSummary)"
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("Long-form joined output failed audio quality checks: %@", comment: "Long-form quality failure"),
+                            joinedReport.failureSummary
+                        )
                     )
                 }
                 if let joinedRecord = request.makeJoinedHistoryRecord(
@@ -913,12 +941,15 @@ final class BatchGenerationRunner {
                 )
                 return .failed(
                     items: items,
-                    message: "Long-form assembly failed: \(error.localizedDescription)"
+                    message: String.localizedStringWithFormat(
+                        NSLocalizedString("Long-form assembly failed: %@", comment: "Long-form assembly error"),
+                        error.localizedDescription
+                    )
                 )
             }
         }
 
-        publishProgress(activeItemIndex: nil, message: "Done")
+        publishProgress(activeItemIndex: nil, message: NSLocalizedString("Done", comment: "Batch progress"))
         return .completed(items: items)
     }
 
@@ -948,7 +979,10 @@ final class BatchGenerationRunner {
               segmentIndex < request.lines.count,
               segmentIndex < plan.segments.count else {
             return (
-                .failed(items: priorItems, message: "The segment to regenerate is not part of this long-form project."),
+                .failed(
+                    items: priorItems,
+                    message: NSLocalizedString("The segment to regenerate is not part of this long-form project.", comment: "Long-form regeneration error")
+                ),
                 priorReplacements
             )
         }
@@ -967,7 +1001,10 @@ final class BatchGenerationRunner {
                 completedCount: items.count(where: \.isSaved),
                 totalCount: total,
                 activeItemIndex: segmentIndex,
-                statusMessage: "Regenerating segment \(segmentIndex + 1)/\(total)..."
+                statusMessage: String.localizedStringWithFormat(
+                    NSLocalizedString("Regenerating segment %lld/%lld...", comment: "Long-form progress"),
+                    Int64(segmentIndex + 1), Int64(total)
+                )
             )
         )
 
@@ -992,7 +1029,10 @@ final class BatchGenerationRunner {
                 return (
                     .failed(
                         items: items,
-                        message: "The regenerated take failed audio quality checks; the previous take is unchanged. \(qualityReport.failureSummary)"
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("The regenerated take failed audio quality checks; the previous take is unchanged. %@", comment: "Long-form regeneration quality failure"),
+                            qualityReport.failureSummary
+                        )
                     ),
                     priorReplacements
                 )
@@ -1021,7 +1061,7 @@ final class BatchGenerationRunner {
                     completedCount: items.count(where: \.isSaved),
                     totalCount: total,
                     activeItemIndex: nil,
-                    statusMessage: "Joining segments..."
+                    statusMessage: NSLocalizedString("Joining segments...", comment: "Long-form progress")
                 )
             )
             let qualityReports: [AudioQualityGate.Report?] = items.indices.map { index in
@@ -1043,7 +1083,10 @@ final class BatchGenerationRunner {
                 return (
                     .failed(
                         items: items,
-                        message: "Long-form joined output failed audio quality checks after regeneration: \(joinedReport.failureSummary)"
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("Long-form joined output failed audio quality checks after regeneration: %@", comment: "Long-form regeneration quality failure"),
+                            joinedReport.failureSummary
+                        )
                     ),
                     replacements
                 )
@@ -1060,7 +1103,7 @@ final class BatchGenerationRunner {
                     completedCount: items.count(where: \.isSaved),
                     totalCount: total,
                     activeItemIndex: nil,
-                    statusMessage: "Done"
+                    statusMessage: NSLocalizedString("Done", comment: "Batch progress")
                 )
             )
             return (.completed(items: items), replacements)
@@ -1071,7 +1114,13 @@ final class BatchGenerationRunner {
                 return (.cancelled(items: items, restartFailedMessage: nil), priorReplacements)
             }
             return (
-                .failed(items: items, message: "Segment regeneration failed: \(error.localizedDescription)"),
+                .failed(
+                    items: items,
+                    message: String.localizedStringWithFormat(
+                        NSLocalizedString("Segment regeneration failed: %@", comment: "Long-form regeneration error"),
+                        error.localizedDescription
+                    )
+                ),
                 priorReplacements
             )
         }

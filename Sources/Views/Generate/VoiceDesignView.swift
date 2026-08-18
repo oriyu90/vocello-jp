@@ -126,8 +126,8 @@ struct VoiceDesignView: View {
         }
         .alert(item: $coordinator.actionAlert) { alert in
             Alert(
-                title: Text(alert.title),
-                message: Text(alert.message),
+                title: Text(LocalizedStringKey(alert.title)),
+                message: Text(LocalizedStringKey(alert.message)),
                 dismissButton: .default(Text("OK"))
             )
         }

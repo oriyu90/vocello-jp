@@ -9,11 +9,11 @@ public enum GenerationMode: String, CaseIterable, Codable, Hashable, Sendable {
         switch self {
         case .custom:
             // User-facing rename 2026-08-15: internal identity stays `custom`.
-            return "Built-in Voice"
+            return NSLocalizedString("Built-in Voice", comment: "Generation mode")
         case .design:
-            return "Voice Design"
+            return NSLocalizedString("Voice Design", comment: "Generation mode")
         case .clone:
-            return "Voice Cloning"
+            return NSLocalizedString("Voice Cloning", comment: "Generation mode")
         }
     }
 
@@ -44,17 +44,17 @@ public enum Qwen3SupportedLanguage: String, CaseIterable, Codable, Hashable, Sen
 
     public var displayName: String {
         switch self {
-        case .auto: return "Auto"
-        case .chinese: return "Chinese"
-        case .english: return "English"
-        case .japanese: return "Japanese"
-        case .korean: return "Korean"
-        case .german: return "German"
-        case .french: return "French"
-        case .russian: return "Russian"
-        case .portuguese: return "Portuguese"
-        case .spanish: return "Spanish"
-        case .italian: return "Italian"
+        case .auto: return NSLocalizedString("Auto", comment: "Language")
+        case .chinese: return NSLocalizedString("Chinese", comment: "Language")
+        case .english: return NSLocalizedString("English", comment: "Language")
+        case .japanese: return NSLocalizedString("Japanese", comment: "Language")
+        case .korean: return NSLocalizedString("Korean", comment: "Language")
+        case .german: return NSLocalizedString("German", comment: "Language")
+        case .french: return NSLocalizedString("French", comment: "Language")
+        case .russian: return NSLocalizedString("Russian", comment: "Language")
+        case .portuguese: return NSLocalizedString("Portuguese", comment: "Language")
+        case .spanish: return NSLocalizedString("Spanish", comment: "Language")
+        case .italian: return NSLocalizedString("Italian", comment: "Language")
         }
     }
 
@@ -1354,9 +1354,9 @@ public enum Qwen3SamplingVariation: String, Codable, Hashable, Sendable, CaseIte
 
     public var displayName: String {
         switch self {
-        case .expressive: return "Expressive"
-        case .balanced: return "Balanced"
-        case .consistent: return "Consistent"
+        case .expressive: return NSLocalizedString("Expressive", comment: "Generation variation")
+        case .balanced: return NSLocalizedString("Balanced", comment: "Generation variation")
+        case .consistent: return NSLocalizedString("Consistent", comment: "Generation variation")
         }
     }
 }
@@ -1767,4 +1767,3 @@ public struct TTSEngineSnapshot: Hashable, Codable, Sendable {
         self.visibleErrorMessage = visibleErrorMessage
     }
 }
-

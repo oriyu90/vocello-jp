@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>en</string>
+    <string>ja</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIconFile</key>
@@ -33,8 +33,8 @@
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Vocello records reference clips for voice cloning. Audio never leaves your Mac.</string>
+    <string>Vocelloは音声クローン用の参照音声を録音します。音声がMacの外へ送信されることはありません。</string>
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Vocello transcribes reference clips on-device to pre-fill transcripts. Nothing is sent to Apple or anyone else.</string>
+    <string>Vocelloは参照音声をデバイス上で文字起こしします。Appleやその他の外部へ送信されることはありません。</string>
 </dict>
 </plist>

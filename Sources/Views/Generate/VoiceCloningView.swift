@@ -144,7 +144,10 @@ struct VoiceCloningView: View {
 
     private var savedVoicesLoadError: String? {
         guard let loadError = savedVoicesViewModel.loadError else { return nil }
-        return "Couldn't load saved voices right now. You can still clone from a file. \(loadError)"
+        return String.localizedStringWithFormat(
+            NSLocalizedString("Couldn't load saved voices right now. You can still clone from a file. %@", comment: "Saved voice loading error"),
+            loadError
+        )
     }
 
     private var selectedSavedVoiceID: Binding<String?> {
@@ -648,7 +651,7 @@ private struct CloneReferenceStatus: View {
                        let shortLabel = PreparedVoiceQualityWarning.shortLabel(for: token) {
                         warningChip(token: token, shortLabel: shortLabel)
                     } else {
-                        Text(referenceDetail)
+                        Text(LocalizedStringKey(referenceDetail))
                             .font(.system(size: 10 * glyphScale, weight: .medium))
                             .foregroundStyle(.secondary)
                     }
@@ -705,7 +708,7 @@ private struct CloneReferenceStatus: View {
             HStack(spacing: 4) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 9 * glyphScale))
-                Text(shortLabel)
+                Text(LocalizedStringKey(shortLabel))
                     .font(.system(size: 10 * glyphScale, weight: .medium))
                 Image(systemName: "chevron.right")
                     .font(.system(size: 7 * glyphScale, weight: .semibold))
@@ -728,7 +731,7 @@ private struct CloneReferenceStatus: View {
                   systemImage: "exclamationmark.triangle.fill")
                 .font(.headline)
                 .foregroundStyle(.orange)
-            Text(PreparedVoiceQualityWarning.summary(for: warnings))
+            Text(LocalizedStringKey(PreparedVoiceQualityWarning.summary(for: warnings)))
                 .font(.callout)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -834,7 +837,7 @@ private struct CloneSourceRow: View {
                     .tag(Optional<String>.none)
 
                 ForEach(sourceEntries(catalog: catalog)) { entry in
-                    Text(entry.label)
+                    Text(LocalizedStringKey(entry.label))
                         .tag(Optional(entry.id))
                 }
             }
@@ -861,7 +864,7 @@ private struct CloneSourceRow: View {
                         .tag(Optional(persona.baseVoiceID))
 
                     ForEach(persona.orderedVariants, id: \.voiceID) { variant in
-                        Text(EmotionPreset.preset(id: variant.presetID)?.label ?? variant.presetID.capitalized)
+                        Text(LocalizedStringKey(EmotionPreset.preset(id: variant.presetID)?.label ?? variant.presetID.capitalized))
                             .tag(Optional(variant.voiceID))
                     }
                 }
@@ -921,13 +924,13 @@ private struct CloneWarningCard: View {
                 .font(.subheadline.weight(.semibold))
 
             VStack(alignment: .leading, spacing: 6) {
-                Text(message)
+                Text(LocalizedStringKey(message))
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if let actionLabel, let action {
-                    Button(actionLabel) {
+                    Button(LocalizedStringKey(actionLabel)) {
                         action()
                     }
                     .buttonStyle(.bordered)

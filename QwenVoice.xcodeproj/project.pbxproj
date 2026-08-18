@@ -358,8 +358,10 @@
 		D45A1753FBA6D932E5DB46C0 /* ModelDownloadLifecycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3906B4F64C4DEF21F1AFEF77 /* ModelDownloadLifecycleTests.swift */; };
 		D75C67CBCAC91DF7F71B0273 /* IOSScrollRefinements.swift in Sources */ = {isa = PBXBuildFile; fileRef = E829FDA2BC5308802AB3A837 /* IOSScrollRefinements.swift */; };
 		D89C3ED2E29D460BCC083DC2 /* GenerationEventDeliveryProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A0F1E6694374FC9EA48E0 /* GenerationEventDeliveryProbe.swift */; };
+		D96FF7548B871047E276BD01 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 142EEE1C994F1B50B2611155 /* InfoPlist.strings */; };
 		D9CD489105C5ADCF38E6EE96 /* IOSModelDeliverySupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC061E247067EDDB99401F09 /* IOSModelDeliverySupport.swift */; };
 		DA60A835AE1FB55B29533BCA /* Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E86AC791986726B8753994F /* Support.swift */; };
+		DA99173E77BDDD96F0990AB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61CFD478FB5A31558EC21513 /* Localizable.strings */; };
 		DAD34C5A369EE8338E586DDC /* NativeTelemetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B33472B5B6CE711BEEF3244 /* NativeTelemetry.swift */; };
 		DB901031F858C01ECCED4DA4 /* IOSGenerationSetupCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CE8FC9B1A2B580ED62408D /* IOSGenerationSetupCards.swift */; };
 		DCEF09940749A14DEB062D04 /* IOSGenerationTextLimitPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9213D3C53B12F841327ACCF /* IOSGenerationTextLimitPolicy.swift */; };
@@ -693,6 +695,7 @@
 		2337382E48EA0E1F25DE7707 /* HistoryPersistenceErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPersistenceErrorTests.swift; sourceTree = "<group>"; };
 		23ECC0A581C6D3682E9A846A /* IOSDeviceDiagnosticsRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSDeviceDiagnosticsRecorder.swift; sourceTree = "<group>"; };
 		2559353B52F1887141092C7C /* GenerationTelemetrySchemaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationTelemetrySchemaTests.swift; sourceTree = "<group>"; };
+		265A0C8DDBE65B33169D3D5E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		27050F2F2D1A321AFF8BA020 /* IOSLongFormProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSLongFormProject.swift; sourceTree = "<group>"; };
 		288BDF7769F75089A6F065B4 /* EmotionPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionPreset.swift; sourceTree = "<group>"; };
 		28F693F3BC2648EEC62DD2CA /* IOSUIPerfHistorySeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSUIPerfHistorySeeder.swift; sourceTree = "<group>"; };
@@ -934,6 +937,7 @@
 		D9EF7430F4440DAB10C24D68 /* GenerationPlanShadowMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationPlanShadowMapperTests.swift; sourceTree = "<group>"; };
 		DB8833440B1C4055104BE1C4 /* GenerationMigrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationMigrations.swift; sourceTree = "<group>"; };
 		DC061E247067EDDB99401F09 /* IOSModelDeliverySupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSModelDeliverySupport.swift; sourceTree = "<group>"; };
+		DC9BF71D1617EA6A314E3962 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DE54BCF401CCC7CA234A148B /* DebugMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMode.swift; sourceTree = "<group>"; };
 		DE98ABA2A416060FE667DD45 /* LanguageSelectionPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionPresentation.swift; sourceTree = "<group>"; };
 		DF80B8EF37D530DCD9E0E0E5 /* NativeTelemetryMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeTelemetryMetadata.swift; sourceTree = "<group>"; };
@@ -1352,6 +1356,8 @@
 				B62852B52626359D53D76C11 /* QwenVoice.entitlements */,
 				E889EF31C2F3350E9F0CC31C /* QwenVoiceApp.swift */,
 				18F6712D7D04D4BA5606C455 /* QwenVoiceEmbeddedRuntime.entitlements */,
+				142EEE1C994F1B50B2611155 /* InfoPlist.strings */,
+				61CFD478FB5A31558EC21513 /* Localizable.strings */,
 				778F3C98BAC3F56DDC56D132 /* Models */,
 				3E3D5538DEF03E894CE51FA3 /* Resources */,
 				8A8BFB536C5E94547DDFB8DD /* Services */,
@@ -2155,11 +2161,11 @@
 				};
 			};
 			buildConfigurationList = A3D129E6D5A19BBE074BCC71 /* Build configuration list for PBXProject "QwenVoice" */;
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
-				en,
+				ja,
 			);
 			mainGroup = 8E419F21B4ECB7B71CC1EC69;
 			minimizedProjectReferenceProxies = 1;
@@ -2229,6 +2235,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				782CC4A0B12968AC18654792 /* Assets.xcassets in Resources */,
+				D96FF7548B871047E276BD01 /* InfoPlist.strings in Resources */,
+				DA99173E77BDDD96F0990AB3 /* Localizable.strings in Resources */,
 				25FD6846BBC91DACB7E80100 /* PrivacyInfo.xcprivacy in Resources */,
 				CAE5016FA22E3B09634BB66F /* README.md in Resources */,
 				451768049CF773CE92C4DE8E /* aiden.wav in Resources */,
@@ -2787,6 +2795,25 @@
 			targetProxy = 6C4475965EC2CF4820E721DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		142EEE1C994F1B50B2611155 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC9BF71D1617EA6A314E3962 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		61CFD478FB5A31558EC21513 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				265A0C8DDBE65B33169D3D5E /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0A7366F00039838673A7CFC7 /* Release */ = {

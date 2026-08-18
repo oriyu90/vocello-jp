@@ -73,9 +73,13 @@ final class ModelManagerViewModel {
 
         var text: String {
             if installedRecommendedCount == totalRecommendedCount {
-                return "Recommended models ready"
+                return NSLocalizedString("Recommended models ready", comment: "Model setup status")
             }
-            return "\(installedRecommendedCount) of \(totalRecommendedCount) recommended models installed"
+            return String.localizedStringWithFormat(
+                NSLocalizedString("%lld of %lld recommended models installed", comment: "Model setup count"),
+                Int64(installedRecommendedCount),
+                Int64(totalRecommendedCount)
+            )
         }
     }
 
@@ -208,7 +212,9 @@ final class ModelManagerViewModel {
 
     func primaryActionTitle(for model: TTSModel) -> String? {
         guard !isAvailable(model) else { return nil }
-        return info(for: model).requiresRepair ? "Repair Model" : "Download Model"
+        return info(for: model).requiresRepair
+            ? NSLocalizedString("Repair Model", comment: "Model action")
+            : NSLocalizedString("Download Model", comment: "Model action")
     }
 
     func isActive(_ model: TTSModel) -> Bool {
@@ -324,13 +330,13 @@ final class ModelManagerViewModel {
         case .checking:
             return ModelPackagePresentation(
                 kind: .checking,
-                label: "Checking",
-                detail: "Looking for local model files."
+                label: NSLocalizedString("Checking", comment: "Model status"),
+                detail: NSLocalizedString("Looking for local model files.", comment: "Model status detail")
             )
         case .notDownloaded(let message):
             return ModelPackagePresentation(
                 kind: .notInstalled,
-                label: "Not installed",
+                label: NSLocalizedString("Not installed", comment: "Model status"),
                 detail: message
             )
         case .downloading(let progress):
@@ -342,19 +348,19 @@ final class ModelManagerViewModel {
         case .repairAvailable(_, let missingRequiredPaths, let message):
             return ModelPackagePresentation(
                 kind: .needsRepair,
-                label: "Needs repair",
+                label: NSLocalizedString("Needs repair", comment: "Model status"),
                 detail: message ?? repairDetail(missingRequiredPaths: missingRequiredPaths)
             )
         case .updateAvailable:
             return ModelPackagePresentation(
                 kind: .updateAvailable,
-                label: "Update available",
-                detail: "A newer model package is pinned. Update to download it."
+                label: NSLocalizedString("Update available", comment: "Model status"),
+                detail: NSLocalizedString("A newer model package is pinned. Update to download it.", comment: "Model status detail")
             )
         case .downloaded:
             return ModelPackagePresentation(
                 kind: .ready,
-                label: "Ready",
+                label: NSLocalizedString("Ready", comment: "Model status"),
                 detail: nil
             )
         }
@@ -375,15 +381,15 @@ final class ModelManagerViewModel {
         let presentation = packagePresentation(for: model)
         switch presentation.kind {
         case .checking:
-            return "Checking"
+            return NSLocalizedString("Checking", comment: "Model status")
         case .ready:
-            return "Ready"
+            return NSLocalizedString("Ready", comment: "Model status")
         case .notInstalled:
-            return "Download"
+            return NSLocalizedString("Download", comment: "Model action")
         case .needsRepair:
-            return "Repair"
+            return NSLocalizedString("Repair", comment: "Model action")
         case .updateAvailable:
-            return "Update"
+            return NSLocalizedString("Update", comment: "Model action")
         case .downloading:
             return presentation.label
         }
@@ -392,11 +398,11 @@ final class ModelManagerViewModel {
     func modePurpose(for mode: GenerationMode) -> String {
         switch mode {
         case .custom:
-            return "Built-in speakers"
+            return NSLocalizedString("Built-in speakers", comment: "Model purpose")
         case .design:
-            return "Describe a new voice"
+            return NSLocalizedString("Describe a new voice", comment: "Model purpose")
         case .clone:
-            return "Use a reference clip"
+            return NSLocalizedString("Use a reference clip", comment: "Model purpose")
         }
     }
 
@@ -521,7 +527,7 @@ final class ModelManagerViewModel {
 
     private func downloadDetail(for progress: DownloadProgress) -> String? {
         if progress.isStalled {
-            return "No progress for 20 seconds."
+            return NSLocalizedString("No progress for 20 seconds.", comment: "Download status")
         }
         var details: [String] = []
         if let totalBytes = progress.totalBytes, totalBytes > 0 {
@@ -529,7 +535,11 @@ final class ModelManagerViewModel {
             let total = Self.formattedFileSize(totalBytes)
             details.append("\(downloaded) of \(total)")
         } else if let totalFiles = progress.totalFiles, totalFiles > 0 {
-            details.append("\(progress.completedFiles) of \(totalFiles) files")
+            details.append(String.localizedStringWithFormat(
+                NSLocalizedString("%lld of %lld files", comment: "Download file count"),
+                Int64(progress.completedFiles),
+                Int64(totalFiles)
+            ))
         }
         if let bytesPerSecond = progress.bytesPerSecond, bytesPerSecond > 0,
            progress.phase == .downloading {
@@ -537,10 +547,16 @@ final class ModelManagerViewModel {
         }
         if let eta = progress.estimatedSecondsRemaining, eta.isFinite,
            progress.phase == .downloading {
-            details.append("about \(max(1, Int(eta.rounded())))s remaining")
+            details.append(String.localizedStringWithFormat(
+                NSLocalizedString("about %llds remaining", comment: "Download time remaining"),
+                Int64(max(1, Int(eta.rounded())))
+            ))
         }
         if progress.phase == .retrying, progress.retryCount > 0 {
-            details.append("retry \(progress.retryCount); verified files will be reused")
+            details.append(String.localizedStringWithFormat(
+                NSLocalizedString("retry %lld; verified files will be reused", comment: "Download retry status"),
+                Int64(progress.retryCount)
+            ))
         }
         if let statusMessage = progress.statusMessage, !statusMessage.isEmpty {
             details.append(statusMessage)
@@ -550,12 +566,15 @@ final class ModelManagerViewModel {
 
     private func repairDetail(missingRequiredPaths: [String]) -> String {
         if missingRequiredPaths.isEmpty {
-            return "The local model folder is incomplete."
+            return NSLocalizedString("The local model folder is incomplete.", comment: "Model repair status")
         }
         if missingRequiredPaths.count == 1 {
-            return "One required file is missing."
+            return NSLocalizedString("One required file is missing.", comment: "Model repair status")
         }
-        return "\(missingRequiredPaths.count) required files are missing."
+        return String.localizedStringWithFormat(
+            NSLocalizedString("%lld required files are missing.", comment: "Model repair status"),
+            Int64(missingRequiredPaths.count)
+        )
     }
 
     private nonisolated static func formattedFileSize(_ bytes: Int64) -> String {
@@ -576,11 +595,22 @@ final class ModelManagerViewModel {
         let displayName = generationVariantDisplayName(for: model)
         if snapshot.requiresRepair {
             if !snapshot.missingRequiredPaths.isEmpty {
-                return "Some required files are missing. Repair \(displayName) to finish installing it."
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("Some required files are missing. Repair %@ to finish installing it.", comment: "Model recovery"),
+                    displayName
+                )
             }
-            return "The local model files are incomplete. Repair \(displayName) to keep using \(model.mode.displayName)."
+            return String.localizedStringWithFormat(
+                NSLocalizedString("The local model files are incomplete. Repair %@ to keep using %@.", comment: "Model recovery"),
+                displayName,
+                model.mode.displayName
+            )
         }
-        return "Install \(displayName) to enable \(model.mode.displayName)."
+        return String.localizedStringWithFormat(
+            NSLocalizedString("Install %@ to enable %@.", comment: "Model recovery"),
+            displayName,
+            model.mode.displayName
+        )
     }
 
     /// Request a model download. Returns immediately; the download runs on the bounded
@@ -1211,19 +1241,19 @@ private extension ModelManagerViewModel.DownloadProgress.Phase {
     var displayLabel: String {
         switch self {
         case .queued:
-            return "Queued"
+            return NSLocalizedString("Queued", comment: "Download phase")
         case .waitingForConnectivity:
-            return "Waiting for network"
+            return NSLocalizedString("Waiting for network", comment: "Download phase")
         case .downloading:
-            return "Downloading"
+            return NSLocalizedString("Downloading", comment: "Download phase")
         case .retrying:
-            return "Retrying"
+            return NSLocalizedString("Retrying", comment: "Download phase")
         case .verifying:
-            return "Verifying"
+            return NSLocalizedString("Verifying", comment: "Download phase")
         case .installing:
-            return "Installing"
+            return NSLocalizedString("Installing", comment: "Download phase")
         case .cancelling:
-            return "Cancelling"
+            return NSLocalizedString("Cancelling", comment: "Download phase")
         }
     }
 

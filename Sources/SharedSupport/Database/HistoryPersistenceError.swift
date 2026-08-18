@@ -28,17 +28,17 @@ struct HistoryPersistenceError: LocalizedError, Equatable, Sendable {
     var errorDescription: String? {
         switch failure {
         case .corrupt:
-            return "Generation History couldn't be read because its database appears damaged. Your existing files were not deleted. Retry, then use recovery or export tools before making changes."
+            return NSLocalizedString("Generation History couldn't be read because its database appears damaged. Your existing files were not deleted. Retry, then use recovery or export tools before making changes.", comment: "History database corruption error")
         case .locked:
-            return "Generation History is temporarily busy. Your existing history was not changed. Wait for other Vocello operations to finish, then retry."
+            return NSLocalizedString("Generation History is temporarily busy. Your existing history was not changed. Wait for other Vocello operations to finish, then retry.", comment: "History database busy error")
         case .permissionDenied:
-            return "Generation History is unavailable because Vocello can't access its database. Your existing history was not changed. Check storage permissions, then retry."
+            return NSLocalizedString("Generation History is unavailable because Vocello can't access its database. Your existing history was not changed. Check storage permissions, then retry.", comment: "History database access error")
         case .storageFull:
-            return "Generation History couldn't be updated because storage is full. Free some space, then retry. Your existing history was not changed."
+            return NSLocalizedString("Generation History couldn't be updated because storage is full. Free some space, then retry. Your existing history was not changed.", comment: "History storage full error")
         case .migrationFailed:
-            return "Generation History couldn't be upgraded safely. The existing database was preserved. Retry before changing or deleting history."
+            return NSLocalizedString("Generation History couldn't be upgraded safely. The existing database was preserved. Retry before changing or deleting history.", comment: "History database migration error")
         case .unavailable:
-            return "Generation History is unavailable. The existing database was preserved. Retry before changing or deleting history."
+            return NSLocalizedString("Generation History is unavailable. The existing database was preserved. Retry before changing or deleting history.", comment: "History database error")
         }
     }
 

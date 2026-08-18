@@ -92,8 +92,11 @@ final class VoiceDesignCoordinator {
             await savedVoicesViewModel.refresh(using: ttsEngineStore)
         }
         actionAlert = VoiceDesignActionAlert(
-            title: "Saved Voice Added",
-            message: "\"\(voice.name)\" is ready in Saved Voices."
+            title: NSLocalizedString("Saved Voice Added", comment: "Saved voice confirmation title"),
+            message: String.localizedStringWithFormat(
+                NSLocalizedString("\"%@\" is ready in Saved Voices.", comment: "Saved voice confirmation"),
+                voice.name
+            )
         )
     }
 
@@ -136,7 +139,7 @@ final class VoiceDesignCoordinator {
             }
         ) { [weak self] in
             guard let model = activeModel else {
-                self?.errorMessage = "Model configuration not found"
+                self?.errorMessage = NSLocalizedString("Model configuration not found", comment: "Missing model error")
                 return nil
             }
             let outputPath = makeOutputPath(subfolder: model.outputSubfolder, text: text)

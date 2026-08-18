@@ -60,7 +60,7 @@ final class CustomVoiceCoordinator {
             }
         ) { [weak self] in
             guard let model = activeModel else {
-                self?.errorMessage = "Model configuration not found"
+                self?.errorMessage = NSLocalizedString("Model configuration not found", comment: "Missing model error")
                 return nil
             }
             let outputPath = makeOutputPath(subfolder: model.outputSubfolder, text: draft.text)

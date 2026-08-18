@@ -1,6 +1,7 @@
 name: QwenVoice
 options:
   bundleIdPrefix: com.qwenvoice
+  developmentLanguage: ja
   deploymentTarget:
     macOS: "26.0"
     iOS: "26.0"

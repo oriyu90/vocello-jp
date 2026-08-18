@@ -12,6 +12,7 @@ import { Engineering } from "./sections/Engineering.jsx";
 import { Limitations } from "./sections/Limitations.jsx";
 import { FinalCTA } from "./sections/FinalCTA.jsx";
 import { Footer } from "./sections/Footer.jsx";
+import { LanguageBar } from "./sections/LanguageBar.jsx";
 import { WORKFLOWS } from "./data/workflows.js";
 
 // Scroll-reveal: sections below the hero fade up as they enter view. The base
@@ -74,6 +75,7 @@ const App = () => {
   return (
   <>
     <a className="skip-link" href="#main-content">Skip to main content</a>
+    <LanguageBar />
     <Nav />
     <main id="main-content">
       <Hero />

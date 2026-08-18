@@ -131,7 +131,7 @@ struct SidebarStatusView: View {
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(AppTheme.accent)
                 }
-                Text(activity.label)
+                Text(LocalizedStringKey(activity.label))
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -176,7 +176,7 @@ struct SidebarStatusView: View {
                 }
                 .buttonStyle(.plain)
             }
-            Text(message)
+            Text(LocalizedStringKey(message))
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
@@ -201,11 +201,11 @@ struct SidebarStatusView: View {
                 Image(systemName: "bolt.fill")
                     .font(.caption)
                     .foregroundStyle(.red)
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.primary)
             }
-            Text(detail)
+            Text(LocalizedStringKey(detail))
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)

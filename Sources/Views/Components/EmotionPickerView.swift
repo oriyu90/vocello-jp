@@ -104,14 +104,14 @@ struct EmotionPickerView: View {
         Picker(title, selection: selectedOptionID) {
             Section("Distinct deliveries") {
                 ForEach(EmotionPreset.all.filter { !$0.isDirectionalHint }) { preset in
-                    Text(preset.label)
+                    Text(LocalizedStringKey(preset.label))
                         .tag(preset.id)
                 }
             }
 
             Section("Directional hints") {
                 ForEach(EmotionPreset.all.filter(\.isDirectionalHint)) { preset in
-                    Text(preset.label)
+                    Text(LocalizedStringKey(preset.label))
                         .tag(preset.id)
                 }
             }
@@ -226,7 +226,7 @@ struct EmotionPickerView: View {
     private var intensityPicker: some View {
         Picker("Intensity", selection: $intensity) {
             ForEach(EmotionIntensity.allCases) { level in
-                Text(level.label).tag(level)
+                Text(LocalizedStringKey(level.label)).tag(level)
             }
         }
         .labelsHidden()

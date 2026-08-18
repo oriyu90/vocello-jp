@@ -9,10 +9,10 @@ enum TTSModelVariantKind: String, CaseIterable, Codable, Hashable, Sendable {
 
     var displayName: String {
         switch self {
-        case .compactSpeed: return "Lite"
-        case .compactQuality: return "Lite+"
-        case .speed: return "Speed"
-        case .quality: return "Quality"
+        case .compactSpeed: return NSLocalizedString("Lite", comment: "Model variant")
+        case .compactQuality: return NSLocalizedString("Lite+", comment: "Model variant")
+        case .speed: return NSLocalizedString("Speed", comment: "Model variant")
+        case .quality: return NSLocalizedString("Quality", comment: "Model variant")
         }
     }
 
@@ -169,9 +169,9 @@ enum GenerationMode: String, CaseIterable, Codable, Hashable, Sendable {
         // speaks with the built-in speakers, and "Custom" confused end users.
         // Every internal identity stays `custom` (mode rawValue, model ID
         // pro_custom, bench cells, telemetry, accessibility identifiers).
-        case .custom: return "Built-in Voice"
-        case .design: return "Voice Design"
-        case .clone: return "Voice Cloning"
+        case .custom: return NSLocalizedString("Built-in Voice", comment: "Generation mode")
+        case .design: return NSLocalizedString("Voice Design", comment: "Generation mode")
+        case .clone: return NSLocalizedString("Voice Cloning", comment: "Generation mode")
         }
     }
 

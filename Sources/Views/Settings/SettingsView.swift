@@ -80,7 +80,7 @@ struct SettingsView: View {
                 Section {
                     Picker("Variation", selection: $generationVariation) {
                         ForEach(Qwen3SamplingVariation.allCases, id: \.rawValue) { variation in
-                            Text(variation.displayName).tag(variation.rawValue)
+                            Text(LocalizedStringKey(variation.displayName)).tag(variation.rawValue)
                         }
                     }
                     .pickerStyle(.segmented)
@@ -150,7 +150,7 @@ struct SettingsView: View {
                     }
 
                     if let outputDirectoryIssue {
-                        Text(outputDirectoryIssue)
+                        Text(LocalizedStringKey(outputDirectoryIssue))
                             .font(.caption)
                             .foregroundStyle(.orange)
                             .fixedSize(horizontal: false, vertical: true)
@@ -235,7 +235,7 @@ struct SettingsView: View {
             }
         } message: {
             if let model = modelToDelete {
-                Text(deleteMessage(for: model))
+                Text(LocalizedStringKey(deleteMessage(for: model)))
             }
         }
     }
@@ -354,7 +354,7 @@ private struct ModelSetupSummaryRow: View {
                     ProgressView(value: setupProgress.fraction)
                         .progressViewStyle(.linear)
                         .tint(AppTheme.statusProgressTint)
-                    Text(setupProgressText(setupProgress))
+                    Text(LocalizedStringKey(setupProgressText(setupProgress)))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .accessibilityIdentifier("settings_recommendedSetupProgress")
@@ -414,12 +414,12 @@ private struct ModelDownloadRow: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(mode.displayName)
+                    Text(LocalizedStringKey(mode.displayName))
                         .font(.callout.weight(.semibold))
                         .lineLimit(1)
                     // Mode-constant facts live here once (size, capability)
                     // instead of repeating on every package line below.
-                    Text(modeSubtitle)
+                    Text(LocalizedStringKey(modeSubtitle))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -468,7 +468,7 @@ private struct ModelPackageLine: View {
                     // mode-constant and already stated once in the mode
                     // subtitle — the old "(1.7B 4-bit)" form repeated it per
                     // row and truncated.
-                    Text(compactVariantLabel)
+                    Text(LocalizedStringKey(compactVariantLabel))
                         .font(.caption.weight(.semibold))
                         .lineLimit(1)
                     packageBadge
@@ -479,7 +479,7 @@ private struct ModelPackageLine: View {
 
                 HStack(spacing: 5) {
                     statusGlyph
-                    Text(presentation.label)
+                    Text(LocalizedStringKey(presentation.label))
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(statusColor)
                         .lineLimit(1)
@@ -506,7 +506,7 @@ private struct ModelPackageLine: View {
             // the static size/capability line repeated mode-constant facts
             // on every row and doubled each row's height.
             if let detail = presentation.detail {
-                Text(detail)
+                Text(LocalizedStringKey(detail))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -815,7 +815,7 @@ private struct HoverableActionButton: View {
         Button {
             action()
         } label: {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .frame(maxWidth: .infinity)
         }
         .controlSize(.small)

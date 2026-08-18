@@ -42,7 +42,7 @@ export const Footer = () => (
       </div>
 
       <div className="footer-legal">
-        <span>© 2026 Vocello. Released under the MIT License.</span>
+        <span>© 2026 PowerBeef; Japanese localization © 2026 Yuki_Orita. MIT License.</span>
         <span>Voice cloning is for voices you own or have permission to use.</span>
       </div>
     </div>

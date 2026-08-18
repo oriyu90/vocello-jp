@@ -1,0 +1,4 @@
+"CFBundleDisplayName" = "Vocello";
+"CFBundleName" = "Vocello";
+"NSMicrophoneUsageDescription" = "Vocelloは音声クローン用の参照音声を録音します。録音した音声がMacの外へ送信されることはありません。";
+"NSSpeechRecognitionUsageDescription" = "Vocelloは参照音声をデバイス上で文字起こしし、原稿を自動入力します。音声や原稿がAppleや第三者へ送信されることはありません。";

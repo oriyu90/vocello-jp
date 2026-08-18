@@ -83,8 +83,8 @@ struct VoicesView: View {
             }
             .alert(item: $actionAlert) { alert in
                 Alert(
-                    title: Text(alert.title),
-                    message: Text(alert.message),
+                    title: Text(LocalizedStringKey(alert.title)),
+                    message: Text(LocalizedStringKey(alert.message)),
                     dismissButton: .default(Text("OK"))
                 )
             }
@@ -108,7 +108,7 @@ struct VoicesView: View {
                     ContentUnavailableView(
                         "Couldn't load saved voices",
                         systemImage: "exclamationmark.triangle",
-                        description: Text(loadError)
+                        description: Text(LocalizedStringKey(loadError))
                     )
 
                     Button("Try Again") {
@@ -283,8 +283,11 @@ private extension VoicesView {
             } catch {
                 await MainActor.run {
                     presentActionAlert(
-                        title: "Delete Failed",
-                        message: "Failed to remove the saved voice: \(error.localizedDescription)"
+                        title: NSLocalizedString("Delete Failed", comment: "Saved voice deletion error title"),
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("Failed to remove the saved voice: %@", comment: "Saved voice deletion error"),
+                            error.localizedDescription
+                        )
                     )
                 }
             }
@@ -425,7 +428,7 @@ private struct VoiceRowMetadata: View {
                     .lineLimit(1)
                     .accessibilityIdentifier("voicesRow_\(voiceID)")
 
-                Text(transcriptStatus)
+                Text(LocalizedStringKey(transcriptStatus))
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 8)
@@ -447,7 +450,7 @@ private struct VoiceRowMetadata: View {
             if qualityHeadline != nil {
                 warningChip
             } else {
-                Text(detailCopy)
+                Text(LocalizedStringKey(detailCopy))
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
@@ -470,7 +473,7 @@ private struct VoiceRowMetadata: View {
             HStack(spacing: 6) {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.caption)
-                Text(label)
+                Text(LocalizedStringKey(label))
                     .font(.caption.weight(.medium))
                 Image(systemName: "chevron.right")
                     .font(.caption2.weight(.semibold))
@@ -503,7 +506,7 @@ private struct VoiceRowMetadata: View {
                 .font(.headline)
                 .foregroundStyle(.orange)
 
-            Text(PreparedVoiceQualityWarning.summary(for: qualityWarnings))
+            Text(LocalizedStringKey(PreparedVoiceQualityWarning.summary(for: qualityWarnings)))
                 .font(.body)
                 .fixedSize(horizontal: false, vertical: true)
 

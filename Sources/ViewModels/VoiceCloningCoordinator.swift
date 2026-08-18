@@ -102,7 +102,7 @@ final class VoiceCloningCoordinator {
             )
             let currentDraft = draft.wrappedValue
             guard currentDraft.referenceAudioPath != nil else {
-                errorMessage = "Select a reference audio file before generating."
+                errorMessage = NSLocalizedString("Select a reference audio file before generating.", comment: "Missing reference audio error")
                 return
             }
             presentLongFormBatch(draft: currentDraft)
@@ -119,7 +119,7 @@ final class VoiceCloningCoordinator {
         )
 
         guard let model = cloneModel else {
-            errorMessage = "Model configuration not found"
+            errorMessage = NSLocalizedString("Model configuration not found", comment: "Missing model error")
             return
         }
 
@@ -129,7 +129,7 @@ final class VoiceCloningCoordinator {
             return
         }
         guard let refPath = currentDraft.referenceAudioPath else {
-            errorMessage = "Select a reference audio file before generating."
+            errorMessage = NSLocalizedString("Select a reference audio file before generating.", comment: "Missing reference audio error")
             return
         }
 
@@ -366,7 +366,11 @@ final class VoiceCloningCoordinator {
             let path = url.path
             guard allowedExtensions.contains(ext) else {
                 Task { @MainActor [weak self] in
-                    self?.errorMessage = "Unsupported file type '.\(ext)'. Drop an audio file (\(VoiceCloningReferenceAudioSupport.supportedFormatDescription))."
+                    self?.errorMessage = String.localizedStringWithFormat(
+                        NSLocalizedString("Unsupported file type '%@'. Drop an audio file (%@).", comment: "Unsupported reference audio error"),
+                        ext,
+                        VoiceCloningReferenceAudioSupport.supportedFormatDescription
+                    )
                 }
                 return
             }

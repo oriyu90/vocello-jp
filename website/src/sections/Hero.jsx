@@ -8,7 +8,7 @@ export const Hero = () => (
       <div className="hero-copy">
         <div className="hero-eyebrow">
           <span className="dot" aria-hidden="true" />
-          Vocello 2.4.0 · macOS 26+ · Apple Silicon
+          Vocello JP 2.4.0 · macOS 26+ · Apple Silicon
         </div>
         <h1 className="hero-title">
           Premium voice studio. <span className="accent-gold">Proven performance.</span>{" "}
@@ -30,7 +30,7 @@ export const Hero = () => (
             Listen to samples
           </a>
         </div>
-        <p className="hero-meta">Signed + notarized Mac download · MIT app code · Swift + MLX</p>
+        <p className="hero-meta">Ad-hoc signed community build · MIT app code · Swift + MLX</p>
         <p className="hero-meta">
           Also on iPhone:{" "}
           <a className="cta-meta-link" href={TESTFLIGHT} target="_blank" rel="noreferrer">

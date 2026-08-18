@@ -21,8 +21,8 @@ public enum EmotionIntensity: Int, CaseIterable, Identifiable, Sendable {
 
     public var label: String {
         switch self {
-        case .normal: "Normal"
-        case .strong: "Strong"
+        case .normal: NSLocalizedString("Normal", comment: "Delivery intensity")
+        case .strong: NSLocalizedString("Strong", comment: "Delivery intensity")
         }
     }
 
@@ -119,7 +119,7 @@ public struct EmotionPreset: Identifiable, Sendable {
         instructions: [EmotionIntensity: String]
     ) {
         self.id = id
-        self.label = label
+        self.label = NSLocalizedString(label, comment: "Delivery preset")
         self.sfSymbol = sfSymbol
         self.instructions = instructions
     }

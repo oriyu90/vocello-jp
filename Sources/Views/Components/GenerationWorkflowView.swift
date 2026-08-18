@@ -135,9 +135,9 @@ struct WorkflowReadinessNote: View {
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.subheadline.weight(.semibold))
-                Text(detail)
+                Text(LocalizedStringKey(detail))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
@@ -189,13 +189,13 @@ struct StudioSectionCard<Content: View>: View {
                         .foregroundStyle(accentColor)
                 }
 
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .font(.subheadline.weight(.semibold))
 
                 Spacer(minLength: 8)
 
                 if let trailingText {
-                    Text(trailingText)
+                    Text(LocalizedStringKey(trailingText))
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(.secondary)
                 }
@@ -203,7 +203,7 @@ struct StudioSectionCard<Content: View>: View {
 
             VStack(alignment: contentAlignment, spacing: style == .inline ? 8 : 10) {
                 if let detail {
-                    Text(detail)
+                    Text(LocalizedStringKey(detail))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -292,7 +292,7 @@ struct CompactConfigurationSection<Content: View>: View {
             header
 
             if let detail {
-                Text(detail)
+                Text(LocalizedStringKey(detail))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -354,7 +354,7 @@ struct CompactConfigurationSection<Content: View>: View {
                 Spacer(minLength: 10)
 
                 if let trailingText {
-                    Text(trailingText)
+                    Text(LocalizedStringKey(trailingText))
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(.secondary)
                 }
@@ -370,7 +370,7 @@ struct CompactConfigurationSection<Content: View>: View {
                     .foregroundStyle(accentColor)
             }
 
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.headline.weight(.semibold))
         }
     }
@@ -493,7 +493,7 @@ struct GenerationSetupRow<Content: View, Supporting: View>: View {
     }
 
     private var labelView: some View {
-        Text(label)
+        Text(LocalizedStringKey(label))
             .font(.callout.weight(.semibold))
             .foregroundStyle(.primary)
     }
@@ -528,7 +528,7 @@ struct GenerationSetupHint: View {
     var accessibilityIdentifier: String? = nil
 
     var body: some View {
-        Text(message)
+        Text(LocalizedStringKey(message))
             .font(.caption)
             .foregroundStyle(.secondary)
             .fixedSize(horizontal: false, vertical: true)
@@ -548,7 +548,7 @@ struct GenerationSetupNotice: View {
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(accentColor)
 
-            Text(message)
+            Text(LocalizedStringKey(message))
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -670,7 +670,7 @@ struct GenerationVariantSelector: View {
             }
             modelManager.use(model)
         } label: {
-            Text(kind.displayName)
+            Text(LocalizedStringKey(kind.displayName))
                 .font(.caption.weight(.semibold))
                 .lineLimit(1)
                 .frame(width: segmentWidth, height: segmentHeight)
@@ -786,11 +786,11 @@ struct ConfigurationColumn<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 4) {
-                Text(label)
+                Text(LocalizedStringKey(label))
                     .font(.footnote.weight(.semibold))
                     .foregroundStyle(isEnabled ? AppTheme.textSecondary : AppTheme.textMuted)
                 if let detail {
-                    Text(detail)
+                    Text(LocalizedStringKey(detail))
                         .font(.footnote.weight(.medium))
                         .foregroundStyle(AppTheme.textMuted)
                 }
@@ -904,7 +904,7 @@ struct QwenLanguagePicker: View {
             // children — so equal column widths and a trailing chevron are
             // only reachable by owning the drawing under a plain style.
             HStack(spacing: 6) {
-                Text(effectiveLabel)
+                Text(LocalizedStringKey(effectiveLabel))
                     .lineLimit(1)
 
                 Spacer(minLength: 0)

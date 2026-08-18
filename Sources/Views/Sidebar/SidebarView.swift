@@ -6,7 +6,7 @@ private struct NavigationSectionHeader: View {
     let accessibilityID: String
 
     var body: some View {
-        Text(title)
+        Text(LocalizedStringKey(title))
             .font(.caption.weight(.semibold))
             .foregroundStyle(.secondary)
             .textCase(nil)
@@ -234,7 +234,7 @@ private struct SidebarRow: View {
                     .foregroundStyle(iconColor)
                     .frame(width: iconSlotWidth, alignment: .center)
 
-                Text(item.rawValue)
+                Text(LocalizedStringKey(item.rawValue))
                     .font(.system(size: labelSize, weight: isSelected ? .semibold : .regular))
                     .foregroundStyle(textColor)
                     .lineLimit(1)

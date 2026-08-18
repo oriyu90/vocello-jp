@@ -110,7 +110,7 @@ struct SidebarPlayerView: View {
                 }
 
                 if let playbackError = audioPlayer.playbackError {
-                    Text(playbackError)
+                    Text(LocalizedStringKey(playbackError))
                         .font(.caption2)
                         .foregroundStyle(.orange)
                         .lineLimit(2)
@@ -150,7 +150,7 @@ private struct InlineLivePreviewStatusView: View {
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(AppTheme.accent)
 
-                Text(activity.label)
+                Text(LocalizedStringKey(activity.label))
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
                     .lineLimit(1)

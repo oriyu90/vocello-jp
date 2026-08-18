@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generated": "python3 scripts/doc_metadata.py rebuild-index",
   "note": "Machine-readable documentation map. Query this instead of globbing docs/.",
-  "annotatedDocuments": 88,
+  "annotatedDocuments": 89,
   "unannotatedDocuments": 0,
   "documents": [
     {
@@ -726,6 +726,16 @@
       "owner": "release-qa",
       "summary": "Vocello 2.3.0. Published release notes, copied verbatim into the GitHub Release. Pinned: the shipped text of a release cannot change retroactively.",
       "contentDigest": "sha256:464be50570133ea5063a0c28d14c6413aab2852ac5d3b7dcb990658b74fda9bc"
+    },
+    {
+      "path": "docs/releases/v2.4.0-jp.1.md",
+      "status": "active",
+      "owner": "release-qa",
+      "summary": "Vocello v2.4.0-jp.1 Japanese localization release notes and installation guidance.",
+      "sourceOfTruth": [
+        "Sources/ja.lproj/Localizable.strings",
+        "project.yml"
+      ]
     },
     {
       "path": "docs/releases/v2.4.0.md",

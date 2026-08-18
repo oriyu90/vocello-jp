@@ -181,4 +181,5 @@ Review when: link repair or archive classification only.
 - [`docs/releases/v2.2.1.md`](../docs/releases/v2.2.1.md)
 - [`docs/releases/v2.2.2.md`](../docs/releases/v2.2.2.md)
 - [`docs/releases/v2.3.0.md`](../docs/releases/v2.3.0.md)
+- [`docs/releases/v2.4.0-jp.1.md`](../docs/releases/v2.4.0-jp.1.md)
 - [`docs/releases/v2.4.0.md`](../docs/releases/v2.4.0.md)

@@ -212,10 +212,10 @@ struct SavedVoiceSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(configuration.title)
+            Text(LocalizedStringKey(configuration.title))
                 .font(.title2.weight(.bold))
 
-            Text(configuration.subtitle)
+            Text(LocalizedStringKey(configuration.subtitle))
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
@@ -284,12 +284,12 @@ struct SavedVoiceSheet: View {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .font(.caption)
                                 .foregroundStyle(.orange)
-                            Text(issue)
+                            Text(LocalizedStringKey(issue))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .accessibilityIdentifier("voicesEnroll_speechUnavailable")
-                            Button(speechIssueButtonLabel) {
+                            Button(LocalizedStringKey(speechIssueButtonLabel)) {
                                 openSpeechSettings()
                             }
                             .controlSize(.small)
@@ -326,7 +326,7 @@ struct SavedVoiceSheet: View {
             }
 
             if let activeMessage = validationMessage ?? errorMessage {
-                Text(activeMessage)
+                Text(LocalizedStringKey(activeMessage))
                     .foregroundStyle(.red)
                     .font(.callout)
                     .accessibilityIdentifier("voicesEnroll_errorMessage")
@@ -341,7 +341,7 @@ struct SavedVoiceSheet: View {
 
                 Spacer()
 
-                Button(configuration.confirmLabel) {
+                Button(LocalizedStringKey(configuration.confirmLabel)) {
                     saveVoice()
                 }
                 .buttonStyle(.borderedProminent)
@@ -409,7 +409,7 @@ struct SavedVoiceSheet: View {
             }
             .accessibilityIdentifier("voicesEnroll_cancelOnWarning")
         } message: { voice in
-            Text(PreparedVoiceQualityWarning.summary(for: voice.qualityWarnings))
+            Text(LocalizedStringKey(PreparedVoiceQualityWarning.summary(for: voice.qualityWarnings)))
         }
     }
 

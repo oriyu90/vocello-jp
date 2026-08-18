@@ -1,4 +1,37 @@
-<h1 align="center">Vocello</h1>
+<h1 align="center">Vocello 日本語版</h1>
+
+<p align="center">
+  <strong>VocelloのmacOS向け完全日本語化ビルド</strong><br>
+  画面、メニュー、設定、権限案内、生成・履歴・モデル管理のエラー表示を日本語化しています。
+</p>
+
+<p align="center">
+  <a href="https://github.com/oriyu90/vocello-jp/releases/latest"><strong>最新の日本語版DMGをダウンロード</strong></a>
+</p>
+
+> [!IMPORTANT]
+> この日本語版DMGはApple Developer ID証明書ではなく、アドホック署名です。初回起動時にmacOSで開けない場合は、「システム設定 → プライバシーとセキュリティ」から「このまま開く」を選択してください。
+
+## 日本語版のインストール
+
+1. [Releases](https://github.com/oriyu90/vocello-jp/releases/latest)から`Vocello-JP-macos26.dmg`を取得します。
+2. DMGを開き、`Vocello.app`を「アプリケーション」へドラッグします。
+3. Vocelloを起動し、「設定 → モデルのダウンロード」から必要なモデルを導入します。
+
+**必要環境:** Apple Silicon搭載Mac、macOS 26.0以降、8GB RAM以上。
+
+## プロジェクト情報
+
+- 日本語化・配布: [Yuki_Orita](https://github.com/oriyu90)
+- 原作: [PowerBeef/Vocello](https://github.com/PowerBeef/Vocello)
+- ライセンス: MIT（原作の著作権表示とライセンスは[`LICENSE`](LICENSE)に保持）
+- 公式サイト: [oriyu90.github.io/official](https://oriyu90.github.io/official/)
+- X: [@InovateofRIZI](https://x.com/InovateofRIZI)
+- Discord: [コミュニティに参加](https://discord.gg/x7KXhNTD8M)
+
+---
+
+## 原作Vocelloの詳細
 
 <p align="center">
   <strong>Premium voice studio. Proven performance. Private by design.</strong>

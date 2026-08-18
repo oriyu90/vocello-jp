@@ -11,7 +11,7 @@ struct StartupDiagnosticsView: View {
                 Label("Vocello", systemImage: "waveform")
                     .font(.title.weight(.semibold))
 
-                Text(snapshot.issue.summary)
+                Text(LocalizedStringKey(snapshot.issue.summary))
                     .font(.title3.weight(.semibold))
 
                 Text("The app can't continue until its native resources are valid. You can retry the startup checks or copy the diagnostics for troubleshooting.")
@@ -31,7 +31,7 @@ struct StartupDiagnosticsView: View {
                     Text("Underlying error")
                         .font(.subheadline.weight(.semibold))
 
-                    Text(snapshot.underlyingError)
+                    Text(LocalizedStringKey(snapshot.underlyingError))
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .textSelection(.enabled)
@@ -63,9 +63,9 @@ struct StartupDiagnosticsView: View {
 
     private func diagnosticsRow(_ label: String, _ value: String?) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(label)
+            Text(LocalizedStringKey(label))
                 .font(.subheadline.weight(.semibold))
-            Text(value ?? "Not found")
+            Text(LocalizedStringKey(value ?? "Not found"))
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .textSelection(.enabled)

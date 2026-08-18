@@ -271,28 +271,37 @@ struct HistoryView: View {
                 Task { @MainActor in clearRequest = nil }
                 guard !databaseUnavailable else {
                     presentActionAlert(
-                        title: "History Unavailable",
-                        message: "Retry loading History before deleting any entries. Your existing database was preserved."
+                        title: NSLocalizedString("History Unavailable", comment: "History database error title"),
+                        message: NSLocalizedString("Retry loading History before deleting any entries. Your existing database was preserved.", comment: "History database error")
                     )
                     return
                 }
                 guard !items.isEmpty else {
-                    presentActionAlert(title: "History Is Empty", message: "There are no history entries to clear.")
+                    presentActionAlert(
+                        title: NSLocalizedString("History Is Empty", comment: "Empty history title"),
+                        message: NSLocalizedString("There are no history entries to clear.", comment: "Empty history message")
+                    )
                     return
                 }
                 switch request.scope {
                 case .keepFiles:
                     actionAlert = HistoryActionAlert(
-                        title: "Clear History?",
-                        message: "This removes all \(items.count) history entries. The generated audio files stay on disk in your outputs folder.",
-                        confirmTitle: "Clear History",
+                        title: NSLocalizedString("Clear History?", comment: "Clear history title"),
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("This removes all %lld history entries. The generated audio files stay on disk in your outputs folder.", comment: "Clear history message"),
+                            Int64(items.count)
+                        ),
+                        confirmTitle: NSLocalizedString("Clear History", comment: "Clear history action"),
                         onConfirm: { performClearAll(deleteAudio: false) }
                     )
                 case .deleteFiles:
                     actionAlert = HistoryActionAlert(
-                        title: "Clear History and Delete Audio?",
-                        message: "This permanently deletes all \(items.count) history entries and their audio files.",
-                        confirmTitle: "Delete Everything",
+                        title: NSLocalizedString("Clear History and Delete Audio?", comment: "Delete all history title"),
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("This permanently deletes all %lld history entries and their audio files.", comment: "Delete all history message"),
+                            Int64(items.count)
+                        ),
+                        confirmTitle: NSLocalizedString("Delete Everything", comment: "Delete all history action"),
                         onConfirm: { performClearAll(deleteAudio: true) }
                     )
                 }
@@ -313,15 +322,15 @@ struct HistoryView: View {
             .alert(item: $actionAlert) { alert in
                 if let confirmTitle = alert.confirmTitle, let onConfirm = alert.onConfirm {
                     Alert(
-                        title: Text(alert.title),
-                        message: Text(alert.message),
-                        primaryButton: .destructive(Text(confirmTitle), action: onConfirm),
+                        title: Text(LocalizedStringKey(alert.title)),
+                        message: Text(LocalizedStringKey(alert.message)),
+                        primaryButton: .destructive(Text(LocalizedStringKey(confirmTitle)), action: onConfirm),
                         secondaryButton: .cancel()
                     )
                 } else {
                     Alert(
-                        title: Text(alert.title),
-                        message: Text(alert.message),
+                        title: Text(LocalizedStringKey(alert.title)),
+                        message: Text(LocalizedStringKey(alert.message)),
                         dismissButton: .default(Text("OK"))
                     )
                 }
@@ -342,7 +351,7 @@ struct HistoryView: View {
                     ContentUnavailableView(
                         "Couldn't load history",
                         systemImage: "exclamationmark.triangle",
-                        description: Text(loadError)
+                        description: Text(LocalizedStringKey(loadError))
                     )
                     Button("Retry") {
                         reloadHistory(reopenFailedStore: true)
@@ -482,8 +491,11 @@ private extension HistoryView {
         savedVoicesViewModel.insertOrReplace(voice)
         Task { await savedVoicesViewModel.refresh(using: ttsEngineStore) }
         presentActionAlert(
-            title: "Saved Voice Added",
-            message: "\"\(voice.name)\" is ready in Saved Voices."
+            title: NSLocalizedString("Saved Voice Added", comment: "Saved voice confirmation title"),
+            message: String.localizedStringWithFormat(
+                NSLocalizedString("\"%@\" is ready in Saved Voices.", comment: "Saved voice confirmation"),
+                voice.name
+            )
         )
     }
 
@@ -640,8 +652,11 @@ private extension HistoryView {
                 try fileManager.copyItem(at: sourceURL, to: url)
             } catch {
                 presentActionAlert(
-                    title: "Export Error",
-                    message: "The file could not be exported: \(error.localizedDescription) Choose another destination and try again."
+                    title: NSLocalizedString("Export Error", comment: "Export error title"),
+                    message: String.localizedStringWithFormat(
+                        NSLocalizedString("The file could not be exported: %@ Choose another destination and try again.", comment: "Export error message"),
+                        error.localizedDescription
+                    )
                 )
             }
         }
@@ -653,13 +668,19 @@ private extension HistoryView {
             break
         case .databaseFailure(let message):
             presentActionAlert(
-                title: "Delete Error",
-                message: "The generation could not be removed from History: \(message) Try again after closing anything using the file."
+                title: NSLocalizedString("Delete Error", comment: "History deletion error title"),
+                message: String.localizedStringWithFormat(
+                    NSLocalizedString("The generation could not be removed from History: %@ Try again after closing anything using the file.", comment: "History deletion error"),
+                    message
+                )
             )
         case .audioCleanupFailure(let message):
             presentActionAlert(
-                title: "Delete Warning",
-                message: "Generation removed from history, but the audio file could not be deleted: \(message)"
+                title: NSLocalizedString("Delete Warning", comment: "History deletion warning title"),
+                message: String.localizedStringWithFormat(
+                    NSLocalizedString("Generation removed from history, but the audio file could not be deleted: %@", comment: "History audio deletion warning"),
+                    message
+                )
             )
         }
     }
@@ -709,8 +730,11 @@ private extension HistoryView {
                 await MainActor.run {
                     databaseUnavailable = true
                     presentActionAlert(
-                        title: "Clear History Error",
-                        message: "Failed to clear history: \(message)"
+                        title: NSLocalizedString("Clear History Error", comment: "Clear history error title"),
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("Failed to clear history: %@", comment: "Clear history error"),
+                            message
+                        )
                     )
                 }
                 return
@@ -725,8 +749,11 @@ private extension HistoryView {
 
                 if failures > 0 {
                     presentActionAlert(
-                        title: "Clear History Warning",
-                        message: "History cleared, but \(failures) audio file\(failures == 1 ? "" : "s") could not be deleted."
+                        title: NSLocalizedString("Clear History Warning", comment: "Clear history warning title"),
+                        message: String.localizedStringWithFormat(
+                            NSLocalizedString("History cleared, but %lld audio files could not be deleted.", comment: "Clear history warning"),
+                            Int64(failures)
+                        )
                     )
                 }
             }
@@ -746,7 +773,7 @@ private struct HistoryRowMetadata: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Text(mode.capitalized)
+            Text(LocalizedStringKey(mode.capitalized))
                 .font(.caption.weight(.semibold))
                 .padding(.horizontal, 7)
                 .padding(.vertical, 3)

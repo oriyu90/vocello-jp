@@ -157,7 +157,7 @@ struct TextInputView: View {
                     .foregroundStyle(.orange)
                     .accessibilityHidden(true)
             }
-            Text(baseLabel)
+            Text(LocalizedStringKey(baseLabel))
                 .font(.footnote.monospacedDigit())
                 .foregroundStyle(isLong ? .orange : .secondary)
         }

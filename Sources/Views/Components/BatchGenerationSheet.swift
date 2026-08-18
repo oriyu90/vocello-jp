@@ -164,11 +164,11 @@ struct BatchGenerationSheet: View {
             VStack(alignment: .leading, spacing: 8) {
                 ProgressView(value: coordinator.progressSnapshot.displayFraction, total: 1.0)
                     .tint(AppTheme.statusProgressTint)
-                Text(progressStatusMessage)
+                Text(LocalizedStringKey(progressStatusMessage))
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 if !coordinator.progressSnapshot.itemStatusText.isEmpty {
-                    Text(coordinator.progressSnapshot.itemStatusText)
+                    Text(LocalizedStringKey(coordinator.progressSnapshot.itemStatusText))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -183,7 +183,7 @@ struct BatchGenerationSheet: View {
         }
 
         if let errorMessage = coordinator.errorMessage {
-            Text(errorMessage)
+            Text(LocalizedStringKey(errorMessage))
                 .foregroundStyle(.red)
                 .font(.callout)
         }
@@ -201,7 +201,7 @@ struct BatchGenerationSheet: View {
 
             Spacer()
 
-            Button(coordinator.isCancelling ? "Cancelling..." : (coordinator.isProcessing ? "Processing..." : "Generate All")) {
+            Button(LocalizedStringKey(coordinator.isCancelling ? "Cancelling..." : (coordinator.isProcessing ? "Processing..." : "Generate All"))) {
                 startBatch()
             }
             .buttonStyle(.borderedProminent)
@@ -223,10 +223,10 @@ struct BatchGenerationSheet: View {
                 .font(.system(size: completionIconSize))
                 .foregroundStyle(completionIconColor(for: outcome))
 
-            Text(completionTitle(for: outcome))
+            Text(LocalizedStringKey(completionTitle(for: outcome)))
                 .font(.title2.weight(.bold))
 
-            Text(completionMessage(for: outcome))
+            Text(LocalizedStringKey(completionMessage(for: outcome)))
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -279,7 +279,7 @@ struct BatchGenerationSheet: View {
                 .buttonStyle(.bordered)
             }
 
-            Button(outcome.savedAudioPaths.isEmpty ? "Close" : "View History") {
+            Button(LocalizedStringKey(outcome.savedAudioPaths.isEmpty ? "Close" : "View History")) {
                 if outcome.savedAudioPaths.isEmpty {
                     dismiss()
                     return
@@ -300,19 +300,20 @@ struct BatchGenerationSheet: View {
 
     private var progressStatusMessage: String {
         if coordinator.isCancelling {
-            return "Cancelling..."
+            return NSLocalizedString("Cancelling...", comment: "Batch cancellation progress")
         }
         let message = coordinator.progressSnapshot.statusMessage.trimmingCharacters(in: .whitespacesAndNewlines)
-        return message.isEmpty ? "Preparing batch..." : message
+        return message.isEmpty ? NSLocalizedString("Preparing batch...", comment: "Batch progress") : message
     }
 
     private func completionMessage(for outcome: BatchGenerationOutcome) -> String {
         switch outcome {
         case .completed(let items):
             let count = items.filter(\.isSaved).count
-            return count == 1
-                ? "1 clip generated successfully."
-                : "\(count) clips generated successfully."
+            return String.localizedStringWithFormat(
+                NSLocalizedString("%lld clips generated successfully.", comment: "Batch completion"),
+                Int64(count)
+            )
         case .cancelled(let items, let restartFailedMessage):
             let count = items.filter(\.isSaved).count
             let total = items.count
@@ -320,9 +321,12 @@ struct BatchGenerationSheet: View {
                 if let restartFailedMessage, !restartFailedMessage.isEmpty {
                     return "Generation was cancelled before any clips were created. \(restartFailedMessage)"
                 }
-                return "Generation was cancelled before any clips were created."
+                return NSLocalizedString("Generation was cancelled before any clips were created.", comment: "Batch cancellation")
             }
-            let base = "\(count) of \(total) clips generated before cancellation."
+            let base = String.localizedStringWithFormat(
+                NSLocalizedString("%lld of %lld clips generated before cancellation.", comment: "Batch cancellation"),
+                Int64(count), Int64(total)
+            )
             if let restartFailedMessage, !restartFailedMessage.isEmpty {
                 return "\(base) \(restartFailedMessage)"
             }
@@ -330,9 +334,15 @@ struct BatchGenerationSheet: View {
         case .failed(let items, let message):
             let completedCount = items.filter(\.isSaved).count
             if completedCount == 0 {
-                return "Batch generation stopped before any clips were saved. \(message)"
+                return String.localizedStringWithFormat(
+                    NSLocalizedString("Batch generation stopped before any clips were saved. %@", comment: "Batch failure"),
+                    message
+                )
             }
-            return "\(completedCount) of \(items.count) clips were saved before the batch stopped. \(message)"
+            return String.localizedStringWithFormat(
+                NSLocalizedString("%lld of %lld clips were saved before the batch stopped. %@", comment: "Batch failure"),
+                Int64(completedCount), Int64(items.count), message
+            )
         }
     }
 
@@ -506,7 +516,7 @@ private struct BatchGenerationItemRow: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             if let statusMessage = item.statusMessage {
-                Text(statusMessage)
+                Text(LocalizedStringKey(statusMessage))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, alignment: .leading)

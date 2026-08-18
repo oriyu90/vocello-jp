@@ -44,7 +44,7 @@ struct VoiceBriefEditor: View {
                     .padding(.vertical, 2)
 
                 if trimmedIsEmpty {
-                    Text(VoiceDesignBriefCatalog.placeholder)
+                    Text(LocalizedStringKey(VoiceDesignBriefCatalog.placeholder))
                         .font(.body)
                         .foregroundStyle(AppTheme.textMuted)
                         .padding(.horizontal, 9)
@@ -91,7 +91,7 @@ struct VoiceBriefEditor: View {
     private var startingPointsMenu: some View {
         Menu {
             ForEach(Array(VoiceDesignBriefCatalog.startingPoints.enumerated()), id: \.offset) { index, starter in
-                Button(starterItemLabel(for: starter)) {
+                Button(LocalizedStringKey(starterItemLabel(for: starter))) {
                     text = starter
                 }
                 .accessibilityLabel("Starting point: \(starter)")

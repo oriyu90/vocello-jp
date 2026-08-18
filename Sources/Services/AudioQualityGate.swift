@@ -14,9 +14,12 @@ enum AudioQualityGate {
 
         var failureSummary: String {
             if requiredFailures.isEmpty {
-                return "Audio quality check passed."
+                return NSLocalizedString("Audio quality check passed.", comment: "Audio quality result")
             }
-            return "Audio quality check failed: \(requiredFailures.joined(separator: ", "))"
+            return String.localizedStringWithFormat(
+                NSLocalizedString("Audio quality check failed: %@", comment: "Audio quality result"),
+                requiredFailures.joined(separator: ", ")
+            )
         }
     }
 
