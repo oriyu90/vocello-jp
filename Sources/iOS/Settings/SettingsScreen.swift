@@ -159,7 +159,7 @@ struct SettingsScreen: View {
                             accessibilityIdentifier: "iosSettings_privacyPolicyRow",
                             value: "",
                             showsChevron: true,
-                            action: { open("https://vocello.vercel.app/privacy") }
+                            action: { open("https://studio-rizi.pages.dev/projects/vocello-jp/privacy") }
                         )
 
                         IOSSettingsReferenceDivider()

@@ -1,6 +1,6 @@
 # Vocello Website
 
-This directory contains the public Vocello marketing site. It is a React + Vite app maintained inside the QwenVoice repo and deployed by Vercel with `website/` as the project root.
+This directory contains the source for the public Vocello marketing site. It is a React + Vite app maintained in this repository and published at `https://studio-rizi.pages.dev/projects/vocello-jp/` through the `oriyu90/studio-rizi` repository.
 
 ## Commands
 
@@ -20,15 +20,13 @@ When working from this directory, the same commands can be run without `--prefix
 
 ## Deployment
 
-Vercel should be configured with:
+1. Run `npm --prefix website run check`.
+2. Sync the resulting `website/dist/` into `oriyu90/studio-rizi` at `website/projects/vocello-jp/`.
+3. Run `npm test` in `studio-rizi` and push its `main` branch.
 
-- Repository: `PowerBeef/Vocello`
-- Root directory: `website`
-- Install command: `npm ci`
-- Build command: `npm run build`
-- Output directory: `dist`
+Cloudflare Pages publishes the central repository's `website/` directory. The former standalone Pages project only provides a permanent redirect to the canonical URL.
 
-Vercel Web Analytics is enabled on the project (cookieless, aggregate page views; enabled
+Vercel Web Analytics remains mounted in the page (cookieless, aggregate page views; enabled
 2026-07-28). The page mounts the `@vercel/analytics` React component, and the privacy policy at
 `public/privacy/index.html` discloses the website-scoped analytics while the apps stay
 zero-telemetry. Keep those three in sync if the analytics posture ever changes.

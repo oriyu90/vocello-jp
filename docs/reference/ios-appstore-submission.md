@@ -54,7 +54,7 @@ download it automatically.
 
 ## 1. Privacy + compliance (App Store Connect)
 
-- [ ] **Privacy Policy URL** = `https://vocello.vercel.app/privacy` (hosted by this repo's website; the in-app
+- [ ] **Privacy Policy URL** = `https://studio-rizi.pages.dev/projects/vocello-jp/privacy` (hosted by this repo's website; the in-app
       Settings → About → Privacy Policy row links to the same URL).
 - [ ] **App Privacy "nutrition label"**: declare **Data Not Collected**. Vocello collects/transmits nothing;
       mic audio + transcripts + generated audio stay on device; the only network egress is Hugging Face model
@@ -91,7 +91,7 @@ non-functional under Guideline 2.1.
       Cloning, the Voices library, History, and model-install Settings. Export named screenshots from a current
       `scripts/ui_test.sh ios smoke` result bundle.
 - [ ] App name, subtitle (≤30 chars each), description, keywords (≤100), support URL (the GitHub repo or the
-      website), marketing URL (`https://vocello.vercel.app`), copyright.
+      website), marketing URL (`https://studio-rizi.pages.dev/projects/vocello-jp`), copyright.
 
 ## 4. Build the signed IPA
 

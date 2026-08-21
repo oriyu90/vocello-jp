@@ -4,7 +4,7 @@ This file provides guidance to AI coding agents when working on the website in t
 
 ## What this is
 
-A marketing site for **Vocello** (formerly QwenVoice), a local-first Mac TTS app. Single-page React + Vite. This directory lives inside the QwenVoice monorepo at `website/` and is deployed by Vercel with `website/` as the project root. The site is the brand surface for the app in the parent repo — see "Content accuracy" below. For repo-wide conventions, the app engine, and the source-of-truth order, see the root [`../CLAUDE.md`](../CLAUDE.md); this file is scoped to the website only.
+A marketing site for **Vocello** (formerly QwenVoice), a local-first Mac TTS app. Single-page React + Vite. This directory lives inside the QwenVoice monorepo at `website/`; its production build is published from `oriyu90/studio-rizi` at `/projects/vocello-jp/`. The site is the brand surface for the app in the parent repo — see "Content accuracy" below. For repo-wide conventions, the app engine, and the source-of-truth order, see the root [`../CLAUDE.md`](../CLAUDE.md); this file is scoped to the website only.
 
 ## Commands
 
@@ -23,7 +23,7 @@ The dependency-free Node contract checks metadata, public release identity, inte
 image alt text, safe external links, assets, visible punctuation, and unqualified performance
 claims. The parent `.github/workflows/ci.yml` runs those checks plus the Vite production build with
 the exact Node/npm identities from `config/toolchain.json`. Browser review remains useful for visual
-behavior; Vercel owns deployment for this directory.
+behavior; the central Studio RIZI repository owns production deployment for this directory.
 
 ## Tooling for this directory
 

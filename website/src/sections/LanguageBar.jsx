@@ -1,10 +1,10 @@
 import React from "react";
 
 const languages = [
-  ["日本語", "/ja/"],
-  ["English", "/en/"],
-  ["中文", "/zh/"],
-  ["Português", "/pt/"],
+  ["日本語", "/projects/vocello-jp/ja/"],
+  ["English", "/projects/vocello-jp/en/"],
+  ["中文", "/projects/vocello-jp/zh/"],
+  ["Português", "/projects/vocello-jp/pt/"],
 ];
 
 export const LanguageBar = () => (

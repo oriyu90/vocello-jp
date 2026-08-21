@@ -1574,8 +1574,8 @@ scripts/macos_test.sh test
       </article>
       <article class="dist-card">
         <h4>Marketing site</h4>
-        <p>React 19 + Vite 8 single page at <code>website/</code>. Deployed on Vercel with cookieless Web Analytics. Brand tokens: gold / lavender / terracotta.</p>
-        <span class="status">vocello.vercel.app</span>
+        <p>React 19 + Vite 8 single page at <code>website/</code>. Published through Studio RIZI on Cloudflare Pages, with cookieless Web Analytics. Brand tokens: gold / lavender / terracotta.</p>
+        <span class="status">studio-rizi.pages.dev/projects/vocello-jp/</span>
       </article>
     </div>
 
@@ -1584,13 +1584,13 @@ scripts/macos_test.sh test
         <div class="band-label">External</div>
         <div>
           <h4>Services the product touches</h4>
-          <p>Hugging Face (model download), GitHub Releases (DMG), Apple Notarization / ASC API, optional TestFlight, Vercel (site). No cloud TTS. No bundled weights. No Python runtime in the shippable app.</p>
+          <p>Hugging Face (model download), GitHub Releases (DMG), Apple Notarization / ASC API, optional TestFlight, Cloudflare Pages (site). No cloud TTS. No bundled weights. No Python runtime in the shippable app.</p>
           <div class="chip-row">
             <span class="chip">Hugging Face</span>
             <span class="chip">GitHub Releases</span>
             <span class="chip">notarytool</span>
             <span class="chip">App Store Connect</span>
-            <span class="chip">Vercel</span>
+            <span class="chip">Cloudflare Pages</span>
             <span class="chip">CoreDevice</span>
           </div>
         </div>
@@ -1858,7 +1858,7 @@ scripts/macos_test.sh test
     {
       "title":"Release and distribution",
       "steps":["Resolve protected tag, source, version, and immutable toolchain identities","Build optimized Release configuration","Sign the macOS app and embedded XPC service","Create, notarize, staple, and verify the DMG","Generate and validate SPDX/CycloneDX SBOMs, checksums, provenance, and release evidence","Create a draft Release, upload, download, and digest-verify its assets","Publish the verified draft as the final transaction","Optionally compile/archive iOS for TestFlight/App Store"],
-      "note":"The marketing site deploys separately from website/ to Vercel. The source-built vocello CLI is not bundled in the DMG; release publication never precedes candidate verification."
+      "note":"The marketing site builds from website/ and is published through the central Studio RIZI Cloudflare Pages project. The source-built vocello CLI is not bundled in the DMG; release publication never precedes candidate verification."
     }
   ],
   "sources": [
@@ -1991,7 +1991,7 @@ scripts/macos_test.sh test
       ]
     },
     {
-      "name":"website/","plat":"web","desc":"React/Vite marketing site and Vercel deployment surface.",
+      "name":"website/","plat":"web","desc":"React/Vite marketing-site source for the central Studio RIZI deployment.",
       "children":[
         {"name":"src/sections/","desc":"Hero, capabilities, workflows, samples, privacy, limitations"},
         {"name":"public/assets/","desc":"Screenshots, samples and brand assets"}
@@ -2044,7 +2044,7 @@ scripts/macos_test.sh test
     {"name":"Apple Developer services","role":"Developer ID signing, notarytool, App Store Connect, optional TestFlight","boundary":"Secrets stay in CI or local keychains"},
     {"name":"Xcode iOS Platform Support","role":"Makes generic/platform=iOS and physical-device destinations eligible","boundary":"Read-only preflight; repository cleanup never removes or downloads components, and no Simulator execution is authorized"},
     {"name":"CoreDevice and paired iPhone","role":"Physical-device install, launch, diagnostics, XCUITest, and profiling","boundary":"Simulator is prohibited"},
-    {"name":"Vercel","role":"Marketing-site deployment from website/","boundary":"Separate from native app runtime"},
+    {"name":"Cloudflare Pages","role":"Marketing-site deployment through Studio RIZI","boundary":"Separate from native app runtime"},
     {"name":"On-device Speech assets","role":"Locale-locked language-output verification","boundary":"Some locales require Wi-Fi asset download"}
   ],
   "tooling": {

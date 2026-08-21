@@ -473,7 +473,7 @@ def validate_readme_public_contract(root: Path) -> list[str]:
             "interactive generations cannot be described as universally seed-replayable",
         r"(?i)exactly like the Mac app":
             "iPhone copy must preserve its platform-specific runtime and model-variant differences",
-        r"https://vocello\.vercel\.app/assets/screens/":
+        r"https://studio-rizi\.pages\.dev/projects/vocello-jp/assets/screens/":
             "README product screenshots must use repository-versioned assets",
         r"(?i)social preview \(maintainers\)":
             "repository administration instructions do not belong on the public product page",

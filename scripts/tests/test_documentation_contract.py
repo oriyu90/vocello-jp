@@ -235,7 +235,7 @@ class DocumentationContractTests(unittest.TestCase):
             "Every generation records its sampling seed.\n\n"
             "The iPhone works exactly like the Mac app.\n\n"
             "Everything stays local — nothing uploads.\n\n"
-            "![Screen](https://vocello.vercel.app/assets/screens/custom-voice.png)\n",
+            "![Screen](https://studio-rizi.pages.dev/projects/vocello-jp/assets/screens/custom-voice.png)\n",
         )
         errors = DOCUMENTATION.validate_readme_public_contract(self.root)
         self.assertGreaterEqual(len(errors), 9)
