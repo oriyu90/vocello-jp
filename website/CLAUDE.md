@@ -4,24 +4,27 @@ This file provides guidance to AI coding agents when working on the website in t
 
 ## What this is
 
-A marketing site for **Vocello** (formerly QwenVoice), a local-first Mac TTS app. Single-page React + Vite. This directory lives inside the QwenVoice monorepo at `website/`; its production build is published from `oriyu90/studio-rizi` at `/projects/vocello-jp/`. The site is the brand surface for the app in the parent repo — see "Content accuracy" below. For repo-wide conventions, the app engine, and the source-of-truth order, see the root [`../CLAUDE.md`](../CLAUDE.md); this file is scoped to the website only.
+The production site is the **Vocello JP localization site** from `public/`. Its Japanese page is published as the canonical root from `oriyu90/studio-rizi` at `/projects/vocello-jp/`. The React + Vite application under `src/` is an upstream reference preview and must never be synchronized to the production path. For repo-wide conventions, see the root [`../CLAUDE.md`](../CLAUDE.md).
 
 ## Commands
 
 ```sh
-npm --prefix website run dev      # from repo root: vite dev server on localhost:5173
+npm --prefix website run dev      # build and preview the localized production site
+npm --prefix website run dev:react-preview # upstream React reference only; never deploy
 npm --prefix website run lint     # deterministic source/metadata/accessibility contract
 npm --prefix website test         # dependency-free Node contract fixtures
 npm --prefix website run build    # from repo root: production build -> website/dist/
+npm --prefix website run build:react-preview # non-production reference build
 npm --prefix website run check    # lint + test + build
 npm --prefix website run preview  # from repo root: serve the production build
 ```
 
 When already inside `website/`, omit `--prefix website` from the same commands.
 
-The dependency-free Node contract checks metadata, public release identity, internal anchors,
+`npm run build` runs `scripts/build-localized.mjs`, promotes `public/ja/index.html` to the root,
+and copies only localized pages plus their required assets. The dependency-free Node contract checks metadata, public release identity, internal anchors,
 image alt text, safe external links, assets, visible punctuation, and unqualified performance
-claims. The parent `.github/workflows/ci.yml` runs those checks plus the Vite production build with
+claims. The parent `.github/workflows/ci.yml` runs those checks plus the localized production build with
 the exact Node/npm identities from `config/toolchain.json`. Browser review remains useful for visual
 behavior; the central Studio RIZI repository owns production deployment for this directory.
 
@@ -37,7 +40,8 @@ behavior; the central Studio RIZI repository owns production deployment for this
 
 ## Architecture
 
-`src/App.jsx` is a **thin composer** (~73 lines). All UI is split across:
+The production source is `public/ja/index.html`, `public/{en,zh,pt}/index.html`,
+`public/localized.css`, and `public/localized.js`. `src/App.jsx` is a non-production reference preview and is a **thin composer** (~73 lines). Its UI is split across:
 
 - `src/sections/` — one file per page section, in render order: `Nav`, `Hero`, `WorkflowBand` (rendered 3× from data), `Listen`, `Capabilities`, `WhyCloud`, `HowItRuns`, `IphoneBeta`, `Engineering`, `Limitations`, `FinalCTA`, `Footer`.
 - `src/components/` — two shared primitives:

@@ -4,10 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run build && vite preview",
+    "dev:react-preview": "vite",
     "lint": "node scripts/site-contract.mjs",
     "test": "node --test tests/*.test.mjs && node scripts/rendered-contract.mjs",
-    "build": "vite build && vite build --ssr src/entry-ssr.jsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "build": "node scripts/build-localized.mjs",
+    "build:react-preview": "vite build && vite build --ssr src/entry-ssr.jsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "check": "npm run lint && npm test && npm run build"
   },
