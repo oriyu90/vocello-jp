@@ -27,6 +27,8 @@ for (const file of [
   "localized.css",
   "localized.js",
   "assets/app-icon-1024.png",
+  "assets/index-B3VX5bSz.css",
+  "assets/index-B9CO2Vgr.js",
   "assets/screens/custom-voice.png",
   "privacy/index.html",
 ]) {
@@ -57,6 +59,8 @@ const outputFiles = [
   "localized.css",
   "localized.js",
   "assets/app-icon-1024.png",
+  "assets/index-B3VX5bSz.css",
+  "assets/index-B9CO2Vgr.js",
   "assets/screens/custom-voice.png",
 ];
 console.log(`Localized Vocello JP site built: ${outputFiles.length} files`);

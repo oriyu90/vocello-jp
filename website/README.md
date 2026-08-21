@@ -32,6 +32,10 @@ Cloudflare Pages publishes the central repository's `website/` directory. The fo
 
 The localized production site does not mount Vercel Analytics or the React application.
 
+The two small hashed files under `public/assets/` are migration tombstones. They replace
+the former upstream JavaScript and CSS at URLs that may remain in edge caches; do not
+remove them while the old URLs are still externally reachable.
+
 The former `PowerBeef/vocello-website` repository is historical after this migration.
 
 Pull requests run the deterministic website contract and localized production build in the repository CI.
